@@ -1,0 +1,45 @@
+# Docker Compose (v2)
+
+version: "2"
+
+services:
+  web:
+    image: drupalcon3acr.azurecr.io/drupal_wxt_prod 
+    environment:
+      - DRUPAL_SETTINGS
+      - DB_PASSWORD
+      - DB_USERNAME
+      - DB_HOST
+      - DB_NAME
+      - DB_DRIVER
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/www/html/sites/default/files:/var/www/html/sites/default/files
+    ports:
+      - '9000:9000'
+  pgb:
+    build:
+      context: docker/images/pgbouncer
+      args:
+        - PGBOUNCER_VERSION=${PGBOUNCER_VERSION}
+    image: drupalcon3acr.azurecr.io/pgbouncer
+    environment:
+      - DATABASES_HOST=drupalcon2.postgres.database.azure.com
+      - DATABASES_PORT=5432
+      - DATABASES_USER=drupal@drupalcon2
+      - DATABASES_PASSWORD=2465StLaurent
+      - DATABASES_DBNAME=drupalcontest
+      - PGBOUNCER_LISTEN_PORT=5432
+      - PGBOUNCER_SERVER_TLS_SSLMODE=require
+      - PGBOUNCER_SERVER_TLS_CA_FILE=/etc/ssl/certs/ca-certificates.cr
+    ports:
+      - '5432:5432'
+  nginx:
+    image: drupalcon3acr.azurecr.io/drupal_nginx_prod 
+    volumes:
+     #- ${WEBAPP_STORAGE_HOME}/www/html/sites/default/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '80:80'
+    depends_on:
+      - web
+    restart: always
+

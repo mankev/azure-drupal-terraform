@@ -1,0 +1,40 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "71632e92-f1c4-457e-8af2-387097a010ae",
+    "id": "dfe475c8-ba86-4581-847c-0cc828827745",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Visual Studio Professional",
+    "state": "Enabled",
+    "tenantId": "71632e92-f1c4-457e-8af2-387097a010ae",
+    "user": {
+      "name": "Kevin.Mannion@cra-arc.gc.ca",
+      "type": "user"
+    }
+  }
+]
+
+service principal
+{
+  "appId": "df446326-7104-43d9-809d-56b557673da3",
+  "displayName": "azure-cli-2020-03-19-15-39-12",
+  "name": "http://azure-cli-2020-03-19-15-39-12",
+  "password": "3420761d-1668-438b-b23d-a34f70b96fd5",
+  "tenant": "71632e92-f1c4-457e-8af2-387097a010ae"
+}
+
+new
+{
+  "appId": "0b2bc7e8-b3fe-4098-851e-1293397a0a3d",
+  "name": "azure-cli-2020-03-19-01-38-35",
+  "password": "80f8d108-341e-4491-af37-880695b80d4f",
+  "tenant": "71632e92-f1c4-457e-8af2-387097a010ae"
+}
+mankev@Terravm:~/work/terra-kev$ az ad sp credential reset --name terra-kev-sp
+{
+  "appId": "df446326-7104-43d9-809d-56b557673da3",
+  "name": "terra-kev-sp",
+  "password": "1f205d8a-66ba-415e-870c-2f9db5efa65d",
+  "tenant": "71632e92-f1c4-457e-8af2-387097a010ae"
+}
